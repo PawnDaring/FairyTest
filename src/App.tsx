@@ -14,7 +14,7 @@ function App() {
     setScores(newScores);
 
     if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion((prev) => prev + 1);
+      setCurrentQuestion(prev => prev + 1);
     } else {
       setShowResult(true);
     }
@@ -23,10 +23,7 @@ function App() {
   const calculateResult = () => {
     const averageScore = scores.reduce((a, b) => a + b, 0) / scores.length;
     return alignments.reduce((prev, curr) => {
-      return Math.abs(curr.score - averageScore) <
-        Math.abs(prev.score - averageScore)
-        ? curr
-        : prev;
+      return Math.abs(curr.score - averageScore) < Math.abs(prev.score - averageScore) ? curr : prev;
     });
   };
 
@@ -36,29 +33,30 @@ function App() {
     setShowResult(false);
   };
 
+  
   const getImagePath = (archetype: string) => {
     const imageMap: Record<string, string> = {
-      Siren: 'src/images/mermaid siren.png',
+      'Siren': 'src/images/mermaid siren.png',
       'Fae-Siren': 'src/images/Fae-Siren.png',
-      Pixie: 'src/images/pixie.png',
-      Undine: 'src/images/Undine.png',
-      Selkie: 'src/images/Selkie.png',
-      Banshee: 'src/images/Banshee.png',
-      Sprite: 'src/images/sprite.png',
-      Nymph: 'src/images/Nymph.png',
-      'Dryad-Nereid': 'src/images/Dryad-Nereid.png',
+      'Pixie': 'src/images/pixie.png',
+      'Undine': 'src/images/Undine.png',
+      'Selkie': 'src/images/Selkie.png',
+      'Banshee': 'src/images/Banshee.png',
+      'Sprite': 'src/images/sprite.png',
+      'Nymph': 'src/images/Nymph.png',
+      'Dryad-Nereid': 'src/images/Dryad-Nereid.png'
     };
     return imageMap[archetype] || '';
   };
 
   return (
-    <div
+    <div 
       className="min-h-screen bg-gradient-to-b from-purple-900 via-blue-900 to-teal-900 text-white"
       style={{
         backgroundImage: `url("/src/images/background.png")`,
         backgroundBlend: 'soft-light',
         backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundPosition: 'center'
       }}
     >
       <div className="container mx-auto px-4 py-8">
@@ -81,13 +79,9 @@ function App() {
               <div className="space-y-6">
                 <div className="mb-8">
                   <div className="h-2 w-full bg-gray-200 rounded-full">
-                    <div
+                    <div 
                       className="h-2 bg-gradient-to-r from-teal-400 to-purple-400 rounded-full transition-all duration-500"
-                      style={{
-                        width: `${
-                          ((currentQuestion + 1) / questions.length) * 100
-                        }%`,
-                      }}
+                      style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
                     ></div>
                   </div>
                   <p className="text-center mt-2 text-sm text-gray-300">
@@ -119,7 +113,7 @@ function App() {
                   return (
                     <>
                       <div className="relative mb-8 group">
-                        <img
+                        <img 
                           src={getImagePath(result.archetype)}
                           alt={result.archetype}
                           className="w-64 h-64 mx-auto rounded-full object-cover border-4 border-white/30 shadow-lg"
@@ -128,12 +122,8 @@ function App() {
                       </div>
 
                       <div className="mb-8">
-                        <h3 className="text-3xl font-bold mb-2">
-                          {description.title}
-                        </h3>
-                        <p className="text-xl italic text-teal-200 mb-4">
-                          {description.subtitle}
-                        </p>
+                        <h3 className="text-3xl font-bold mb-2">{description.title}</h3>
+                        <p className="text-xl italic text-teal-200 mb-4">{description.subtitle}</p>
                         <div className="space-y-2">
                           <p className="text-lg text-purple-200">
                             {result.disposition} {result.coreType}
@@ -143,37 +133,27 @@ function App() {
 
                       <div className="prose prose-invert mx-auto max-w-2xl space-y-6">
                         <div className="bg-white/5 p-6 rounded-lg">
-                          <p className="text-lg leading-relaxed">
-                            {description.essence}
-                          </p>
+                          <p className="text-lg leading-relaxed">{description.essence}</p>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div className="bg-white/5 p-6 rounded-lg">
-                            <h4 className="text-lg font-semibold text-teal-300 mb-2">
-                              Signature Power
-                            </h4>
+                            <h4 className="text-lg font-semibold text-teal-300 mb-2">Signature Power</h4>
                             <p className="text-xl">{result.signatureTrait}</p>
                           </div>
                           <div className="bg-white/5 p-6 rounded-lg">
-                            <h4 className="text-lg font-semibold text-purple-300 mb-2">
-                              Weakness
-                            </h4>
+                            <h4 className="text-lg font-semibold text-purple-300 mb-2">Weakness</h4>
                             <p className="text-xl">{result.weakness}</p>
                           </div>
                         </div>
 
                         <div className="bg-white/5 p-6 rounded-lg">
-                          <h4 className="text-lg font-semibold text-teal-300 mb-2">
-                            Your Lesson
-                          </h4>
+                          <h4 className="text-lg font-semibold text-teal-300 mb-2">Your Lesson</h4>
                           <p className="text-lg italic">{description.lesson}</p>
                         </div>
 
                         <div className="bg-white/5 p-6 rounded-lg">
-                          <h4 className="text-lg font-semibold text-purple-300 mb-2">
-                            Folklore
-                          </h4>
+                          <h4 className="text-lg font-semibold text-purple-300 mb-2">Folklore</h4>
                           <p className="text-sm">{description.folklore}</p>
                         </div>
                       </div>
